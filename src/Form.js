@@ -3,7 +3,6 @@
 
 import React from 'react';
 import './App.css';
-import Footer from './Footer';
 
 const validEmailRegex = RegExp(
     /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
@@ -82,11 +81,18 @@ export default class Form extends React.Component {
         event.preventDefault();
         if (validateForm(this.state.errors)) {
             console.info('Valid Form')
+            this.handlePrint();
         } else {
             console.error('Invalid Form')
         }
-        this.setState({ event: event.target.value });
+
     }
+
+    handlePrint = () => {
+        console.log(this.state);
+
+    }
+
 
     render() {
         const { errors } = this.state;
@@ -128,27 +134,38 @@ export default class Form extends React.Component {
                                 <span className='error'>{errors.players}</span>}
                         </div>
 
-                        {/* Date and Time */}
+                        {/* Date*/}
                         <div className='players'>
-                            <label>Choose a date and  time hourly for your appointment:</label>
-                            <input type="dateTime-local" name="dateTime" onChange={this.handleChange}
-                                min="2022-01-01T07:00" max="2023-12-01T7:00"
+                            <label>Choose a date :</label>
+                            <input type="date" name="dateTime" onChange={this.handleChange}
+                                min="2022-1-01" max="2023-12-31" 
+                               
+                                required />
+
+                            {errors.dateTime.valueOf < 'T07:00' && errors.dateTime.valueOf > 'T7:00' &&
+                                <span className='error'>{errors.dateTime}</span>}
+                        </div>
+
+                        {/* Time */}
+                        <div className='players'>
+                            <label>Choose an hourly session : </label>
+                            <input type="time" name="dateTime" onChange={this.handleChange}
+                                min="07:00" max="18:00"
                                 step="3600"
 
                                 required />
-                            {errors.dateTime.length < 'T07:00' && errors.dateTime.length > 'T7:00' &&
+                            {errors.dateTime < '07:00' && errors.dateTime > '18:00' &&
                                 <span className='error'>{errors.dateTime}</span>}
                         </div>
 
 
                         <div className='submit'>
-                            <button >Submit</button>
+                            <button>Submit</button>
+                        </div >
+                    </form >
+                </div >
+            </div >
 
-                        </div>
-                    </form>
-                </div>
-            </div>
-          
         );
     }
 }
