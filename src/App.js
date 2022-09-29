@@ -1,10 +1,7 @@
-
-
-
 import React from 'react';
 import './App.css';
 import Footer from './Footer';
-import Form from './Form';
+import Form2 from './Form2';
 
 
 
@@ -12,7 +9,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div className='App'>
-         <Form />
+         <Form2 />
          <Footer />
       </div >
     );
@@ -20,4 +17,3 @@ export default class App extends React.Component {
 }
 
 
-// export default App;

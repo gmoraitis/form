@@ -51,7 +51,6 @@ export default class Form extends React.Component {
                 errors.lastName = value.length > 3 && validNameRegex.test(value)
                     ? ''
                     : 'Last name is not valid! Must be at least 3 letters long!';
-
                 break;
             case 'email':
                 errors.email =
@@ -64,6 +63,7 @@ export default class Form extends React.Component {
                     value < 1
                         ? 'Type least 1 person!'
                         : '';
+                break;
             case 'date':
                 errors.dateTime =
                     value.min < '08:00' && value.max > '18:00'
@@ -87,6 +87,7 @@ export default class Form extends React.Component {
         event.preventDefault();
         if (validateForm(this.state.errors)) {
             console.info('Valid Form')
+            console.log(this)
             this.handlePrint();
         } else {
             console.error('Invalid Form')
@@ -168,6 +169,9 @@ export default class Form extends React.Component {
                         <div className='submit'>
                             <button>Submit</button>
                         </div >
+
+
+
                     </form >
                 </div >
             </div >
