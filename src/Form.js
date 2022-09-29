@@ -64,10 +64,16 @@ export default class Form extends React.Component {
                     value < 1
                         ? 'Type least 1 person!'
                         : '';
-            case 'dateTime':
+            case 'date':
                 errors.dateTime =
-                    value.min < 'T07:00' && value.max > 'T7:00'
-                        ? 'Time must be at least 07:00!'
+                    value.min < '08:00' && value.max > '18:00'
+                        ? 'Time must be at least 08:00!'
+                        : '';
+                break;
+            case 'time':
+                errors.dateTime =
+                    value.min < '08:00' && value.max > '18:00'
+                        ? 'Time must be at least 08:00!'
                         : '';
                 break;
             default:
@@ -137,9 +143,9 @@ export default class Form extends React.Component {
                         {/* Date*/}
                         <div className='players'>
                             <label>Choose a date :</label>
-                            <input type="date" name="dateTime" onChange={this.handleChange}
-                                min="2022-1-01" max="2023-12-31" 
-                               
+                            <input type="date" name="date" onChange={this.handleChange}
+                                min="2022-1-01" max="2023-12-31"
+
                                 required />
 
                             {errors.dateTime.valueOf < 'T07:00' && errors.dateTime.valueOf > 'T7:00' &&
@@ -149,12 +155,12 @@ export default class Form extends React.Component {
                         {/* Time */}
                         <div className='players'>
                             <label>Choose an hourly session : </label>
-                            <input type="time" name="dateTime" onChange={this.handleChange}
-                                min="07:00" max="18:00"
+                            <input type="time" name="time" onChange={this.handleChange}
+                                min="08:00" max="18:00"
                                 step="3600"
 
                                 required />
-                            {errors.dateTime < '07:00' && errors.dateTime > '18:00' &&
+                            {errors.dateTime < '08:00' && errors.dateTime > '18:00' &&
                                 <span className='error'>{errors.dateTime}</span>}
                         </div>
 
